@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'Proxima Nova Rg';
+    font-style: normal;
+    font-weight: 400;
+    font-display: auto;
+    src: local('Proxima Nova Rg'),
+         url('../src/assets/fonts/proxima-nova.woff2') format('woff2'),
+         url('../src/assets/fonts/proxima-nova.woff') format('woff'),
+         url('../src/assets/fonts/proxima-nova.ttf') format('truetype'),
+         url('../src/assets/fonts/proxima-nova.eot') format('embedded-opentype');
+}
+
+@font-face {
+    font-family: 'Proxima Nova Bold';
+    font-style: normal;
+    font-weight: 400;
+    font-display: auto;
+    src: local('Proxima Nova Bold'),
+         url('../src/assets/fonts/proxima-nova-bold.woff2') format('woff2'),
+         url('../src/assets/fonts/proxima-nova-bold.woff') format('woff'),
+         url('../src/assets/fonts/proxima-nova-bold.ttf') format('truetype'),
+         url('../src/assets/fonts/proxima-nova-bold.eot') format('embedded-opentype');
+}
+
+@font-face {
+    font-family: 'Proxima Nova Bold Italic';
+    font-style: normal;
+    font-weight: 400;
+    font-display: auto;
+    src: local('Proxima Nova Bold Italic'),
+         url('../src/assets/fonts/proxima-nova-bold-italic.woff2') format('woff2'),
+         url('../src/assets/fonts/proxima-nova-bold-italic.woff') format('woff'),
+         url('../src/assets/fonts/proxima-nova-bold-italic.ttf') format('truetype'),
+         url('../src/assets/fonts/proxima-nova-bold-italic.eot') format('embedded-opentype');
+}
