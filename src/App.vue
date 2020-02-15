@@ -1,12 +1,19 @@
 <template>
   <div id="app">
+    <SvgSprite></SvgSprite>
     <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator';
+import SvgSprite from '@/components/SvgSprite.vue';
 
+@Component({
+  components: {
+    SvgSprite,
+  },
+})
 export default class App extends Vue {}
 </script>
 
