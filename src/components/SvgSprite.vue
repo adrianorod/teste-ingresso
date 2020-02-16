@@ -24,6 +24,16 @@
   </svg>
 </template>
 
+<script>
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component({
+  components: {},
+})
+export default class SvgSprite extends Vue {
+}
+</script>
+
 <style scoped lang="scss">
 .svg-sprite {
   display: none;
