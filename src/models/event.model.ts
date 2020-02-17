@@ -1,7 +1,9 @@
 import MovieModel from './movie.model';
 
-interface EventModel {
+export default class EventModel {
   event: MovieModel;
-}
 
-export default EventModel;
+  constructor() {
+    this.event = new MovieModel();
+  }
+}

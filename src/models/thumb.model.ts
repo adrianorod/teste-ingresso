@@ -1,6 +1,10 @@
-interface ThumbModel {
+export default class ThumbModel {
   url: string;
-  type: string;
-}
 
-export default ThumbModel;
+  type: string;
+
+  constructor() {
+    this.url = '';
+    this.type = '';
+  }
+}
