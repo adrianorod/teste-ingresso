@@ -1,31 +1,32 @@
 <template>
   <div class="home">
+    <div class="title">
+      <span>em cartaz</span>
+    </div>
+
     <svg class="icon-loading" v-if="movies.length === 0 && !hasError">
       <use xlink:href="#icon-loading"></use>
     </svg>
+
     <div class="error-message" v-if="hasError">
       Ops! Parece que algo não carregou corretamente. Pode tentar novamente? :/
     </div>
+
     <div class="error-message" v-if="filteredMovies.length === 0 && movies.length !== 0">
       Ops! Sua busca não resultou em nada. Tente digitar algo diferente! ;)
     </div>
 
-    <div class="movie-wrapper">
-      <div class="movie-list-title">
-        <span>em cartaz</span>
-      </div>
-      <ul class="movie-list">
-        <li
-          class="movie"
-          v-for="movie in filteredMovies"
-          :key="movie.id"
-          @click.prevent="selectMovie(movie)"
-        >
-          <div class="thumb"><img :src="movie.images[0].url" :alt="movie.title" /></div>
-          <span class="title">{{movie.title}}</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="movie-list">
+      <li
+        class="movie"
+        v-for="movie in filteredMovies"
+        :key="movie.id"
+        @click.prevent="selectMovie(movie)"
+      >
+        <div class="thumb"><img :src="movie.images[0].url" :alt="movie.title" /></div>
+        <span class="title">{{movie.title}}</span>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -86,6 +87,20 @@ export default class Home extends Vue {
 
 <style scoped lang="scss">
 .home {
+  > .title {
+    text-transform: uppercase;
+    font-family: Proxima Nova Bold;
+    color: #FE7302;
+    text-align: left;
+    padding: 10px 0;
+    border-bottom: 1px solid #616161;
+
+    > span {
+      padding: 10px 0;
+      border-bottom: 1px solid #FE7302;
+    }
+  }
+
   > .icon-loading {
     margin: 50px;
     width: 50px;
@@ -96,60 +111,44 @@ export default class Home extends Vue {
     margin: 100px 10px;
   }
 
-  > .movie-wrapper {
-    > .movie-list-title {
-      text-transform: uppercase;
-      font-family: Proxima Nova Bold;
-      color: #FE7302;
-      text-align: left;
-      padding: 10px 0;
-      border-bottom: 1px solid #616161;
+  > .movie-list {
+    display: flex;
+    flex-wrap: wrap;
 
-      > span {
-        padding: 10px 0;
-        border-bottom: 1px solid #FE7302;
-      }
-    }
+    > .movie {
+      list-style: none;
+      width: 200px;
+      margin: 10px;
 
-    > .movie-list {
-      display: flex;
-      flex-wrap: wrap;
-
-      > .movie {
-        list-style: none;
-        width: 200px;
-        margin: 10px;
-
-        &:hover {
-          cursor: pointer;
-
-          > .thumb {
-            > img {
-              width: 103%;
-            }
-          }
-        }
+      &:hover {
+        cursor: pointer;
 
         > .thumb {
-          max-height: 293px;
-          max-width: 200px;
-          margin-bottom: 5px;
-          overflow: hidden;
-          text-align: center;
-
           > img {
-            height: auto;
-            width: 100%;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: width .3s ease;
+            width: 103%;
           }
         }
+      }
 
-        > .title {
-          font-family: Proxima Nova Bold;
+      > .thumb {
+        max-height: 293px;
+        max-width: 200px;
+        margin-bottom: 5px;
+        overflow: hidden;
+        text-align: center;
+
+        > img {
+          height: auto;
+          width: 100%;
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+          transition: width .3s ease;
         }
+      }
+
+      > .title {
+        font-family: Proxima Nova Bold;
       }
     }
   }
