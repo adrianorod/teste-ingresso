@@ -7,29 +7,45 @@
     </a>
 
     <div class="actions">
-      <div class="search-select">
+      <div class="search">
         <svg class="icon-action">
           <use xlink:href="#icon-search"></use>
         </svg>
       </div>
 
-      <div class="city-select">
-        <span>São Paulo</span>
-        <svg class="icon-action">
-          <use xlink:href="#icon-city"></use>
-        </svg>
+      <div class="city">
+        <div class="city-label" @click.prevent="handleCitySelect">
+          <span>São Paulo</span>
+          <svg class="icon-action">
+            <use xlink:href="#icon-city"></use>
+          </svg>
+        </div>
+        <ul :class="'city-select' + (isCitySelectVisible ? ' -is-visible' : '')">
+          <li>São Paulo</li>
+          <li>Rio de Janeiro</li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component({
   components: {},
 })
 export default class Header extends Vue {
+  isCitySelectVisible: boolean;
+
+  constructor() {
+    super();
+    this.isCitySelectVisible = false;
+  }
+
+  handleCitySelect() {
+    this.isCitySelectVisible = !this.isCitySelectVisible;
+  }
 }
 </script>
 
@@ -68,11 +84,55 @@ export default class Header extends Vue {
     align-items: center;
     display: flex;
 
-    > .city-select {
+    > .city {
       cursor: pointer;
-      align-items: center;
-      display: flex;
       margin-left: 10px;
+      position: relative;
+
+      > .city-label {
+        align-items: center;
+        display: flex;
+      }
+
+      > .city-select {
+        list-style: none;
+        padding: 0;
+        overflow: hidden;
+        width: max-content;
+        max-height: 0;
+        transition: max-height .3s ease, padding .2s ease;
+        position: absolute;
+        top: 12px;
+        right: 4px;
+
+        &.-is-visible {
+          padding: 5px 0 0;
+          max-height: 200px;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 1px;
+          right: 2px;
+          background-color: #252525;
+          width: 10px;
+          height: 10px;
+          transform: rotate(45deg);
+          z-index: -1;
+        }
+
+        > li {
+          background-color: #252525;
+          border-radius: 10px 0 10px 10px;
+          padding: 8px 15px;
+          margin-bottom: 2px;
+
+          &:hover {
+            background-color: #000;
+          }
+        }
+      }
     }
   }
 }
