@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <svg class="icon-loading" v-if="$store.state.movies.length === 0 && !hasError">
+    <svg class="icon-loading" v-if="movies.length === 0 && !hasError">
       <use xlink:href="#icon-loading"></use>
     </svg>
     <div class="error-message" v-if="hasError">
@@ -9,7 +9,7 @@
 
     <div class="movie-wrapper">
       <ul class="movie-list">
-        <li class="movie" v-for="movie in $store.state.movies" :key="movie.id">
+        <li class="movie" v-for="movie in movies" :key="movie.id">
           <div class="thumb"><img :src="movie.images[0].url" :alt="movie.title" /></div>
           <span class="title">{{movie.title}}</span>
         </li>
