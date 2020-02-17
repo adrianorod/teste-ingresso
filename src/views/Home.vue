@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    <svg class="icon-loading" v-if="!movies && !hasError">
+    <svg class="icon-loading" v-if="$store.state.movies.length === 0 && !$store.state.hasError">
       <use xlink:href="#icon-loading"></use>
     </svg>
-    <div class="error-message" v-if="hasError">
+    <div class="error-message" v-if="$store.state.hasError">
       Ops! Parece que algo não carregou corretamente. Pode tentar novamente? :/
     </div>
 
     <div class="movie-wrapper">
       <ul class="movie-list">
-        <li class="movie" v-for="movie in movies" :key="movie.id">
+        <li class="movie" v-for="movie in $store.state.movies" :key="movie.id">
           <div class="thumb"><img :src="movie.images[0].url" :alt="movie.title" /></div>
           <span class="title">{{movie.title}}</span>
         </li>
@@ -21,31 +21,19 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import MovieService from '@/services/movie.service';
-import MovieModel from '@/models/movie.model';
-import UF from '@/utils/constants';
 
 @Component({
   components: {},
 })
 export default class Home extends Vue {
-  movies: MovieModel[];
-
-  hasError: boolean;
-
-  constructor() {
-    super();
-    this.movies = [];
-    this.hasError = false;
-  }
-
   mounted() {
     this.getMovies();
   }
 
   async getMovies() {
-    const data = await MovieService.getFilms(UF.RJ);
-    if (data) this.movies = data;
-    else this.hasError = true;
+    const data = await MovieService.getFilms(this.$store.state.selectedUF);
+    if (data) this.$store.state.movies = data;
+    else this.$store.state.hasError = true;
   }
 }
 </script>
