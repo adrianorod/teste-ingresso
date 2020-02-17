@@ -69,10 +69,12 @@ export default class Header extends Vue {
 
   handleCitySelect() {
     this.isCitySelectVisible = !this.isCitySelectVisible;
+    this.isSearchInputVisible = false;
   }
 
   handleSearchInput() {
     this.isSearchInputVisible = !this.isSearchInputVisible;
+    this.isCitySelectVisible = false;
   }
 
   selectCity(city: UFModel) {
