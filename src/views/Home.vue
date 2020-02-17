@@ -11,8 +11,16 @@
     </div>
 
     <div class="movie-wrapper">
+      <div class="movie-list-title">
+        <span>em cartaz</span>
+      </div>
       <ul class="movie-list">
-        <li class="movie" v-for="movie in filteredMovies" :key="movie.id">
+        <li
+          class="movie"
+          v-for="movie in filteredMovies"
+          :key="movie.id"
+          @click.prevent="selectMovie(movie)"
+        >
           <div class="thumb"><img :src="movie.images[0].url" :alt="movie.title" /></div>
           <span class="title">{{movie.title}}</span>
         </li>
@@ -67,6 +75,12 @@ export default class Home extends Vue {
   onSelectedUFChanged() {
     this.getMovies();
   }
+
+  selectMovie = (movie: MovieModel) => {
+    const trailer = movie.trailers.find((item) => item.type.toLowerCase() === 'youtube');
+    const url = trailer ? trailer.url : movie.siteURL;
+    window.open(url);
+  }
 }
 </script>
 
@@ -83,6 +97,20 @@ export default class Home extends Vue {
   }
 
   > .movie-wrapper {
+    > .movie-list-title {
+      text-transform: uppercase;
+      font-family: Proxima Nova Bold;
+      color: #FE7302;
+      text-align: left;
+      padding: 10px 0;
+      border-bottom: 1px solid #616161;
+
+      > span {
+        padding: 10px 0;
+        border-bottom: 1px solid #FE7302;
+      }
+    }
+
     > .movie-list {
       display: flex;
       flex-wrap: wrap;
