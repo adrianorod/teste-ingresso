@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import MovieModel from '@/models/movie.model';
+import UFModel from '@/models/uf.model';
 import UF from '@/utils/constants';
 
 Vue.use(Vuex);
@@ -10,7 +11,7 @@ export default new Vuex.Store({
   state: {
     movies: Array<MovieModel>(),
     hasError: false,
-    selectedUF: UF.SP,
+    selectedUF: UF[0],
   },
 
   mutations: {
@@ -20,7 +21,7 @@ export default new Vuex.Store({
     setHasError(state, hasError: boolean) {
       state.hasError = hasError;
     },
-    setSelectedUf(state, uf: number) {
+    setSelectedUf(state, uf: UFModel) {
       state.selectedUF = uf;
     },
   },

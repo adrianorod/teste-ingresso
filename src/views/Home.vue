@@ -31,7 +31,7 @@ export default class Home extends Vue {
   }
 
   async getMovies() {
-    const data = await MovieService.getFilms(this.$store.state.selectedUF);
+    const data = await MovieService.getFilms(this.$store.state.selectedUF.id);
     if (data) this.$store.state.movies = data;
     else this.$store.state.hasError = true;
   }
