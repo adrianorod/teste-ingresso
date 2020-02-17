@@ -15,7 +15,7 @@
 
       <div class="city">
         <div class="city-label" @click.prevent="handleCitySelect">
-          <span>{{$store.state.selectedUF.name}}</span>
+          <span>{{selectedUF.name}}</span>
           <svg class="icon-action">
             <use xlink:href="#icon-city"></use>
           </svg>
@@ -47,6 +47,10 @@ export default class Header extends Vue {
     super();
     this.isCitySelectVisible = false;
     this.UFList = UF;
+  }
+
+  get selectedUF() {
+    return this.$store.state.selectedUF;
   }
 
   handleCitySelect() {
