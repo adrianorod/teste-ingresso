@@ -87,6 +87,8 @@ export default class Home extends Vue {
 
 <style scoped lang="scss">
 .home {
+  padding: 8px;
+
   > .title {
     text-transform: uppercase;
     font-family: Proxima Nova Bold;
