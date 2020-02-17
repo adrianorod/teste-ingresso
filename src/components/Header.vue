@@ -15,14 +15,15 @@
 
       <div class="city">
         <div class="city-label" @click.prevent="handleCitySelect">
-          <span>São Paulo</span>
+          <span>{{$store.state.selectedUF.name}}</span>
           <svg class="icon-action">
             <use xlink:href="#icon-city"></use>
           </svg>
         </div>
         <ul :class="'city-select' + (isCitySelectVisible ? ' -is-visible' : '')">
-          <li>São Paulo</li>
-          <li>Rio de Janeiro</li>
+          <li v-for="city in UFList" :key="city.id" @click.prevent="selectCity(city)">
+            {{city.name}}
+          </li>
         </ul>
       </div>
     </div>
@@ -31,6 +32,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import UFModel from '@/models/uf.model';
+import UF from '@/utils/constants';
 
 @Component({
   components: {},
@@ -38,13 +41,21 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class Header extends Vue {
   isCitySelectVisible: boolean;
 
+  UFList: UFModel[];
+
   constructor() {
     super();
     this.isCitySelectVisible = false;
+    this.UFList = UF;
   }
 
   handleCitySelect() {
     this.isCitySelectVisible = !this.isCitySelectVisible;
+  }
+
+  selectCity(city: UFModel) {
+    this.$store.commit('setSelectedUf', city);
+    this.isCitySelectVisible = false;
   }
 }
 </script>
