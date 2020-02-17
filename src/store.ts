@@ -12,6 +12,7 @@ export default new Vuex.Store({
     movies: Array<MovieModel>(),
     hasError: false,
     selectedUF: UF[0],
+    searchValue: '',
   },
 
   mutations: {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     setSelectedUf(state, uf: UFModel) {
       state.selectedUF = uf;
+    },
+    setSearchValue(state, value: string) {
+      state.searchValue = value;
     },
   },
 });
