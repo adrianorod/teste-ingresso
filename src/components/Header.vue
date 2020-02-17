@@ -34,6 +34,8 @@ export default class Header extends Vue {
 </script>
 
 <style lang="scss">
+@import '../assets/styles/mixins';
+
 .header {
   align-items: center;
   justify-content: space-between;
@@ -44,7 +46,15 @@ export default class Header extends Vue {
 
   .icon-logo {
     height: 35px;
-    width: 200px;
+    transition: width .3s ease;
+
+    @include mobile {
+      width: 120px;
+    }
+
+    @include desktop {
+      width: 200px;
+    }
   }
 
   .icon-action {
