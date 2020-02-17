@@ -6,10 +6,13 @@
     <div class="error-message" v-if="hasError">
       Ops! Parece que algo não carregou corretamente. Pode tentar novamente? :/
     </div>
+    <div class="error-message" v-if="filteredMovies.length === 0 && movies.length !== 0">
+      Ops! Sua busca não resultou em nada. Tente digitar algo diferente! ;)
+    </div>
 
     <div class="movie-wrapper">
       <ul class="movie-list">
-        <li class="movie" v-for="movie in movies" :key="movie.id">
+        <li class="movie" v-for="movie in filteredMovies" :key="movie.id">
           <div class="thumb"><img :src="movie.images[0].url" :alt="movie.title" /></div>
           <span class="title">{{movie.title}}</span>
         </li>
@@ -21,6 +24,7 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import MovieService from '@/services/movie.service';
+import MovieModel from '@/models/movie.model';
 
 @Component({
   components: {},
@@ -42,6 +46,16 @@ export default class Home extends Vue {
     return this.$store.state.movies;
   }
 
+  get searchValue() {
+    return this.$store.state.searchValue;
+  }
+
+  get filteredMovies() {
+    return this.movies.filter(
+      (item: MovieModel) => item.title.toLowerCase().includes(this.searchValue.toLowerCase()),
+    );
+  }
+
   async getMovies() {
     this.$store.commit('setMovies', []);
     const data = await MovieService.getFilms(this.selectedUF.id);
@@ -58,10 +72,14 @@ export default class Home extends Vue {
 
 <style scoped lang="scss">
 .home {
-  .icon-loading {
+  > .icon-loading {
     margin: 50px;
     width: 50px;
     height: 50px;
+  }
+
+  > .error-message {
+    margin: 100px 10px;
   }
 
   > .movie-wrapper {
